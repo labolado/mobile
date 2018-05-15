@@ -17,12 +17,17 @@
     return _sharedObject;
 }
 
-- (RCTBridge *)bridgeForBundleURL:(NSURL *)jsCodeLocation {
+- (RCTBridge *)bridge {
+    NSURL *jsCodeLocation = [[NSBundle bundleForClass:[self class]] URLForResource:@"RNHotels" withExtension:@"js"];
     // For the future, we might consider storing a map of bridges for locations
-    if (_bridge) {
-        return _bridge;
+    if (!_bridge) {
+        _bridge = [[RCTBridge alloc] initWithBundleURL:jsCodeLocation moduleProvider:nil launchOptions:nil];
     }
-    return [[RCTBridge alloc] initWithBundleURL:jsCodeLocation moduleProvider:nil launchOptions:nil];
+    return _bridge;
+}
+
+- (RCTRootView *)createReactView:(NSDictionary *)params {
+    return [[RCTRootView alloc] initWithBridge:_bridge moduleName:@"KiwiHotels" initialProperties:params];
 }
 
 @end

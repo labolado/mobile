@@ -8,6 +8,7 @@
 
 #import "RNHotelsViewController.h"
 #import "RNHotelsParameters.h"
+#import "RNHotelsBridge.h"
 
 #import <RNNavigator/RNNavigationModule.h>
 #import <RNLogging/RNLoggingModule.h>
@@ -21,7 +22,6 @@
 @interface RNHotelsViewController() <RNNavigationDelegate, RNLogger, RNTranslator, RNCurrencyFormatter>
 
 @property (nonatomic, strong) RNHotelsParameters *params;
-@property (nonatomic, strong) RCTBridge *bridge;
 
 @end
 
@@ -29,10 +29,9 @@
 
 #pragma mark - Setup
 
-- (instancetype)initWithBridge:(RCTBridge *)bridge params:(RNHotelsParameters *)params {
+- (instancetype)initWithParams:(NSDictionary *)params {
     self = [super init];
     if (self) {
-        _bridge = bridge;
         _params = params;
         [self setupReactWrappersWithObject:self];
     }
@@ -50,7 +49,7 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
-    self.view = [[RCTRootView alloc] initWithBridge:_bridge moduleName:_params.moduleName initialProperties:_params.initialProperties];
+    self.view = [[RNHotelsBridge sharedInstance] createReactView:_params];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

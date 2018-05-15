@@ -31,8 +31,8 @@
 
 @interface RNHotelsViewController: UIViewController
 
-- (nonnull instancetype)initWithBridge:(RCTBridge * _Nonnull)bridge params:(RNHotelsParameters * _Nonnull)params;
-- (nonnull instancetype)init NS_UNAVAILABLE;
+- (nonnull instancetype)initWithParams:(NSDictionary * _Nonnull)params;
+- (nonnull instancetype)init;
 
 @property (nonatomic, weak, nullable) id<RNCurrencyManager> currencyFormatter;
 @property (nonatomic, weak, nullable) id<RNTranslationProvider> translationProvider;
