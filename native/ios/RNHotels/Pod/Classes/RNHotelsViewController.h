@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <React/RCTBridge.h>
 
 @class RNHotelsViewController, RNHotelsParameters;
 
@@ -30,7 +31,7 @@
 
 @interface RNHotelsViewController: UIViewController
 
-- (nonnull instancetype)initWithInitialParameters:(nonnull RNHotelsParameters *)parameters;
+- (nonnull instancetype)initWithBridge:(RCTBridge * _Nonnull)bridge params:(RNHotelsParameters * _Nonnull)params;
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
 @property (nonatomic, weak, nullable) id<RNCurrencyManager> currencyFormatter;
