@@ -1,12 +1,5 @@
-//
-//  AppDelegate.m
-//  RNNativePlayground
-//
-//  Created by Mike on 17.05.2018.
-//  Copyright © 2018 Facebook. All rights reserved.
-//
-
 #import "AppDelegate.h"
+#import <RNKiwiMobile/RNKiwiBridge.h>
 
 @interface AppDelegate ()
 
@@ -17,6 +10,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //  @TODO do not hardcode this instead implement protocol
+    [[RNKiwiBridge sharedInstance] createBridge:[NSURL URLWithString:@"http://localhost:8081/index.bundle?platform=ios&dev=true"]];
     return YES;
 }
 

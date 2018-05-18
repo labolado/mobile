@@ -1,5 +1,6 @@
 #import "RNKiwiViewController.h"
 #import "RNKiwiOptions.h"
+#import "RNKiwiBridge.h"
 
 #import <RNNavigator/RNNavigationModule.h>
 #import <RNLogging/RNLoggingModule.h>
@@ -45,10 +46,9 @@
     ? [_options jsCodeLocation]
     : [[NSBundle bundleForClass:[self class]] URLForResource:@"hotels.ios" withExtension:@"jsbundle"];
   
-  self.view = [[RCTRootView alloc] initWithBundleURL:bundleUrl
-                                          moduleName:[_options moduleName]
-                                   initialProperties:[_options initialProperties]
-                                       launchOptions:nil];
+  RCTBridge* bridge = (RCTBridge *)[[RNKiwiBridge sharedInstance] createBridge:bundleUrl];
+
+  self.view = [[RCTRootView alloc] initWithBridge:bridge moduleName:[_options moduleName] initialProperties:[_options initialProperties]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
