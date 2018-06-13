@@ -5,7 +5,6 @@ import { ConfigContext } from '@kiwicom/mobile-config';
 import {
   Device,
   GeolocationContext,
-  AdaptableLayout,
   type OnLayout,
 } from '@kiwicom/mobile-shared';
 
@@ -18,19 +17,12 @@ type Props = {|
 |};
 
 export default class RootComponent extends React.Component<Props> {
-  emitDimensionChanges = (event: OnLayout) => {
-    const { width, height } = event.nativeEvent.layout;
-    Device.emitDimensionChanges(height, width);
-  };
-
   render = () => (
     <ConfigContext.Provider dataSaverEnabled={this.props.dataSaverEnabled}>
       <HotelsSearchContext.Provider>
         <HotelsFilterContext.Provider>
           <GeolocationContext.Provider>
-            <AdaptableLayout.Provider>
-              {this.props.children}
-            </AdaptableLayout.Provider>
+            {this.props.children}
           </GeolocationContext.Provider>
         </HotelsFilterContext.Provider>
       </HotelsSearchContext.Provider>

@@ -2,22 +2,18 @@
 
 import { Dimensions, Platform } from 'react-native'; // eslint-disable-line no-restricted-imports
 
-type DimensionsType = {|
+type DimensionsChangedEvent = {|
   width: number,
   height: number,
 |};
 
-let dimensions: DimensionsType = {
-  width: 0,
-  height: 0,
-};
-
-function renewDimensions(): DimensionsType {
-  if (dimensions.width === 0 && dimensions.height === 0) {
-    return Dimensions.get('screen');
-  }
-  return dimensions;
-}
+let dimensions: DimensionsChangedEvent = Dimensions.get('screen');
+console.log('Setup');
+Dimensions.addEventListener('change', ({ screen }) => {
+  dimensions = screen;
+  console.log(dimensions);
+  dimensionChangeListeners.forEach(listener => listener(dimensions));
+});
 
 const dimensionChangeListeners = [];
 
@@ -28,31 +24,11 @@ const dimensionChangeListeners = [];
  */
 export default {
   /**
-   * This is just a workaround for RN issue with wrong screen dimensions while
-   * multitasking in iOS devices. It should be called ONLY from the root
-   * element.
-   *
-   * @see: https://github.com/facebook/react-native/issues/16152
-   */
-  emitDimensionChanges(height: number, width: number) {
-    // store new dimensions to the memory so they persist
-    dimensions = {
-      height,
-      width,
-    };
-
-    // invoke listeners with new dimensions
-    dimensionChangeListeners.forEach(event => {
-      event({ height, width });
-    });
-  },
-
-  /**
    * Dimensions may change (landscape <-> portrait, multitasking). Subscribe to
    * this event if you want to be notified about these changes.
    */
   subscribeToDimensionChanges(
-    handler: (dimensions: DimensionsType) => void,
+    handler: (dimensions: DimensionsChangedEvent) => void,
   ): () => void {
     dimensionChangeListeners.push(handler);
 
@@ -69,8 +45,7 @@ export default {
    * `---`
    */
   isPortrait() {
-    const { height, width } = renewDimensions();
-    return height >= width;
+    return dimensions.height >= dimensions.width;
   },
 
   /**
@@ -79,8 +54,7 @@ export default {
    * `------`
    */
   isLandscape() {
-    const { height, width } = renewDimensions();
-    return width >= height;
+    return dimensions.width >= dimensions.height;
   },
 
   /**
@@ -90,8 +64,7 @@ export default {
    * WARNING: this won't update with device change. Use subscriber instead.
    */
   isWideLayout() {
-    const { width } = renewDimensions();
-    return width > this.getWideDeviceThreshold();
+    return dimensions.width > this.getWideDeviceThreshold();
   },
 
   /**
@@ -119,11 +92,7 @@ export default {
     });
   },
 
-  /**
-   * WARNING: this won't update with device change.
-   * Should only be used in componentDidMount.
-   */
   getDimensions() {
-    return renewDimensions();
+    return dimensions;
   },
 };

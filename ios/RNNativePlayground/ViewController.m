@@ -54,7 +54,7 @@
 }
   
 - (NSURL *)jsCodeLocation {
-  return RNKiwiConstants.hotelsBundle;
+  return [NSURL URLWithString:@"http://localhost:8081/index.bundle?platform=ios&dev=true"];
 }
   
 - (void)viewDidAppear:(BOOL)animated {

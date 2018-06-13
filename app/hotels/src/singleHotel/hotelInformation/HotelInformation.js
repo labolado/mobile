@@ -50,7 +50,7 @@ export class HotelInformation extends React.Component<Props> {
   render = () => {
     const baseComponent = this.renderBaseComponent();
     return (
-      <AdaptableLayout.Consumer
+      <AdaptableLayout
         renderOnNarrow={baseComponent}
         renderOnWide={
           <View>

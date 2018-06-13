@@ -133,7 +133,7 @@ export class Header extends React.Component<Props> {
   render = () => {
     const header = this.renderHeader();
     return (
-      <AdaptableLayout.Consumer
+      <AdaptableLayout
         renderOnNarrow={header}
         renderOnWide={<View style={styles.tabletContainer}>{header}</View>}
       />

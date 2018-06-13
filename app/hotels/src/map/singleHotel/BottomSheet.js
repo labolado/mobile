@@ -35,7 +35,7 @@ export default class BottomSheet extends React.Component<Props> {
     );
 
     return (
-      <AdaptableLayout.Consumer
+      <AdaptableLayout
         renderOnWide={<View style={styles.wideContainer}>{content}</View>}
         renderOnNarrow={<View style={styles.narrowContainer}>{content}</View>}
       />

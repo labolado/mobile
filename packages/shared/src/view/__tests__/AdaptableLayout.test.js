@@ -9,7 +9,7 @@ it('renders empty element without props', () => {
   expect(
     Renderer.create(
       <AdaptableLayout.Provider>
-        <AdaptableLayout.Consumer />
+        <AdaptableLayout />
       </AdaptableLayout.Provider>,
     ),
   ).toMatchSnapshot();
@@ -24,7 +24,7 @@ it('throw error when called without provider', () => {
   jest.spyOn(console, 'error').mockImplementation(() => {});
 
   expect(() =>
-    Renderer.create(<AdaptableLayout.Consumer />),
+    Renderer.create(<AdaptableLayout />),
   ).toThrowErrorMatchingSnapshot();
 
   process.env.NODE_ENV = NODE_ENV;

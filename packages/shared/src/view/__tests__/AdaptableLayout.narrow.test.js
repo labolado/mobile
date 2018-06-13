@@ -20,7 +20,7 @@ it('renders narrow components', () => {
   expect(
     Renderer.create(
       <AdaptableLayout.Provider>
-        <AdaptableLayout.Consumer
+        <AdaptableLayout
           renderOnWide={<ThrowsError />}
           renderOnNarrow={<RendersCorrectly />}
         />
@@ -33,7 +33,7 @@ it('renders empty element if there is no narrow layout', () => {
   expect(
     Renderer.create(
       <AdaptableLayout.Provider>
-        <AdaptableLayout.Consumer renderOnWide={<ThrowsError />} />
+        <AdaptableLayout renderOnWide={<ThrowsError />} />
       </AdaptableLayout.Provider>,
     ),
   ).toMatchSnapshot();

@@ -55,7 +55,7 @@ export class FlightList extends React.Component<Props, State> {
       }
 
       return (
-        <AdaptableLayout.Consumer
+        <AdaptableLayout
           key={key}
           renderOnNarrow={<View style={styles.itemContainer}>{Component}</View>}
           renderOnWide={

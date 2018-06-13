@@ -52,7 +52,7 @@ class FlightListContainer extends React.Component<Props, State> {
         <Text style={styles.subtitle}>
           <Translation id="mmb.my_bookings.future_trips" />
         </Text>
-        <AdaptableLayout.Consumer
+        <AdaptableLayout
           renderOnNarrow={<FlightList data={this.props.future} />}
           renderOnWide={
             <View style={styles.tabletWrapper}>
@@ -63,7 +63,7 @@ class FlightListContainer extends React.Component<Props, State> {
         <Text style={styles.subtitle}>
           <Translation id="mmb.my_bookings.past_trips" />
         </Text>
-        <AdaptableLayout.Consumer
+        <AdaptableLayout
           renderOnNarrow={<FlightList data={this.props.past} />}
           renderOnWide={
             <View style={styles.tabletWrapper}>
