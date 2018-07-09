@@ -5,10 +5,8 @@
  * everywhere (types are not exported directly).
  */
 
-import {
-  type ____DangerouslyImpreciseStyleProp_Internal,
-  type DangerouslyImpreciseStyle,
-} from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import { type ____DangerouslyImpreciseStyleProp_Internal } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type { DangerouslyImpreciseStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 type ReducedDangerouslyImpreciseStyle = $Rest<
   DangerouslyImpreciseStyle,
